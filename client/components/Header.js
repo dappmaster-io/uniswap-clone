@@ -81,15 +81,20 @@ function Header() {
             <AiOutlineDown />
           </div>
         </div>
-
-        <div
-          onClick={() => connectWallet()}
-          className={`${style.button} ${style.buttonPadding}`}
-        >
-          <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
-            <p>Connect Wallet</p>
+        {currentAccount ? (
+          <div className={`${style.button} ${style.buttonPadding}`}>
+            <div className={style.buttonTextContainer}>{currentAccount}</div>
           </div>
-        </div>
+        ) : (
+          <div
+            onClick={() => connectWallet()}
+            className={`${style.button} ${style.buttonPadding}`}
+          >
+            <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
+              <p>Connect Wallet</p>
+            </div>
+          </div>
+        )}
 
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={`${style.buttonIconContainer} mx-2`}>
