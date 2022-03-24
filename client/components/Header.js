@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Image from 'next/image'
 import { FiArrowUpRight } from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
@@ -25,6 +25,12 @@ const style = {
 function Header() {
   const [selectedNav, setSelectedNav] = useState('swap')
   const { connectWallet, currentAccount } = useContext(TransactionContext)
+  const [userName, setUserName] = useState()
+
+  useEffect(() => {
+    if (!currentAccount) return
+    setUserName(`${currentAccount.slice(0, 7)}...${currentAccount.slice(35)}`)
+  }, [currentAccount])
 
   return (
     <div className={style.wrapper}>
@@ -83,7 +89,7 @@ function Header() {
         </div>
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
-            <div className={style.buttonTextContainer}>{currentAccount}</div>
+            <div className={style.buttonTextContainer}>{userName}</div>
           </div>
         ) : (
           <div
